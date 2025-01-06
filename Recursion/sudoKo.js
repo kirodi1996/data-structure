@@ -10,14 +10,14 @@ function isValid(board, k, row, col) {
 function sudoKo (board) {
     for(let i=0; i<9; i++) {
         for(let j=0; j<9;j++) {
-            if(board[i][j] === 0) {
-                for(let k=1 ; k<=9;k++) {
+            if(board[i][j] === '.') {
+                for(let k of '123456789') {
                     if(isValid(board, k, i ,j)) {
                         board[i][j] = k
                         if(sudoKo(board)) {
                             return true
                         } else {
-                            board[i][j] = 0
+                            board[i][j] = '.'
                         }
                     }
                 }
@@ -30,7 +30,7 @@ function sudoKo (board) {
 
 function main() {
     const n = 9;
-    const arr = Array.from({length: n}, ()=> Array(n).fill(0))
+    const arr = Array.from({length: n}, ()=> Array(n).fill('.'))
     sudoKo(arr)
 }
 
